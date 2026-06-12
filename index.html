@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeMaster - 打字训练</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <span id="header-title" class="header-title" style="cursor:pointer" title="点击返回主菜单">⌨️ TypeMaster</span>
+    <div class="header-controls">
+      <button id="pause-btn" class="icon-btn" title="暂停">⏸</button>
+      <button id="sound-toggle" class="icon-btn" title="音效开关">🔊</button>
+    </div>
+  </header>
+
+  <div id="menu-screen" class="screen visible">
+    <div class="card">
+      <div class="card-section">
+        <div class="card-label">🎯 选择模式</div>
+        <div class="mode-selector">
+          <button data-mode="falling" class="mode-btn active">经典坠落</button>
+          <button data-mode="paragraph" class="mode-btn">段落竞速</button>
+          <button data-mode="timed" class="mode-btn">限时挑战</button>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-label">📊 选择难度</div>
+        <div class="difficulty-selector">
+          <button data-difficulty="very-easy" class="diff-btn">非常简单</button>
+          <button data-difficulty="easy" class="diff-btn">简单</button>
+          <button data-difficulty="normal" class="diff-btn active">普通</button>
+          <button data-difficulty="hard" class="diff-btn">困难</button>
+          <button data-difficulty="very-hard" class="diff-btn">非常困难</button>
+        </div>
+      </div>
+      <div class="action-row">
+        <button id="start-btn" class="start-btn">开始游戏</button>
+      </div>
+      <div class="action-row" style="margin-top:0.5rem">
+        <button id="leaderboard-btn" data-screen="leaderboard" class="btn-secondary">排行榜</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-screen" class="screen">
+    <div id="game-stats" class="stats-bar">
+      <div class="stat-item"><div id="stat-wpm" class="stat-value wpm">0</div><div class="stat-label">WPM</div></div>
+      <div class="stat-item"><div id="stat-cpm" class="stat-value cpm">0</div><div class="stat-label">CPM</div></div>
+      <div class="stat-item"><div id="stat-accuracy" class="stat-value accuracy">100%</div><div class="stat-label">正确率</div></div>
+      <div class="stat-item"><div id="stat-score" class="stat-value score">0</div><div class="stat-label">得分</div></div>
+      <div class="stat-item"><div id="stat-lives" class="stat-value hearts">❤️❤️❤️</div><div class="stat-label">生命</div></div>
+    </div>
+    <div id="game-area" class="game-area"></div>
+    <div class="input-area">
+      <input type="text" id="game-input" class="game-input" placeholder="输入后按空格提交..." autofocus>
+    </div>
+
+    <div id="pause-overlay" class="pause-overlay" style="display:none">
+      <div class="pause-card">
+        <div class="pause-title">⏸ 游戏已暂停</div>
+        <div class="pause-actions">
+          <button id="pause-resume-btn" class="start-btn">继续游戏</button>
+          <button id="pause-quit-btn" class="btn-secondary" style="text-align:center">终止并结算</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="result-screen" class="screen">
+    <div class="card">
+      <div class="result-title">🏁 游戏结束</div>
+      <div id="result-stats" class="result-grid">
+        <div class="result-item"><div id="result-wpm" class="result-value wpm">0</div><div class="result-label">WPM</div></div>
+        <div class="result-item"><div id="result-cpm" class="result-value cpm">0</div><div class="result-label">CPM</div></div>
+        <div class="result-item"><div id="result-accuracy" class="result-value accuracy">0%</div><div class="result-label">正确率</div></div>
+        <div class="result-item"><div id="result-score" class="result-value score">0</div><div class="result-label">得分</div></div>
+        <div class="result-item"><div id="result-max-combo" class="result-value combo">x0</div><div class="result-label">最高连击</div></div>
+      </div>
+      <div id="new-record" class="new-record" style="display:none">🏆 新纪录！</div>
+      <div class="action-row">
+        <button id="replay-btn" class="start-btn">再来一次</button>
+        <button id="menu-btn" class="btn-secondary" style="flex:1">返回菜单</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="leaderboard-screen" class="screen">
+    <div class="card">
+      <div class="leaderboard-header">
+        <span class="leaderboard-title">🏆 排行榜</span>
+        <button id="lb-clear-btn" class="leaderboard-clear">清空记录</button>
+      </div>
+      <table id="leaderboard-table" class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>日期</th>
+            <th>模式</th>
+            <th>难度</th>
+            <th>WPM</th>
+            <th>正确率</th>
+            <th>得分</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="action-row" style="margin-top:1rem">
+        <button id="lb-back-btn" class="btn-secondary">返回菜单</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/words.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/modes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
